@@ -56,14 +56,14 @@ Dataset is loaded using `torchvision.datasets.MNIST`.
 
 Click below to open the notebook directly in Colab:
 
-[![Open In Colab](
+[[Open In Colab](https://colab.research.google.com/drive/1ZnskVwaA6MU31EFxv0ZfvXg0UpBvCyGE?usp=sharing)
 
 ---
 
 ### Option 2: Run Locally
 
 ```bash
-git clone https://github.com/your-username/handwritten-digit-recognition.git
+git clone https://github.com/Ri796/handwritten-digit-recognition.git
 cd handwritten-digit-recognition
 pip install -r requirements.txt
 ```
@@ -105,7 +105,3 @@ handwritten-digit-recognition/
 
 **Riddhima Patra**
 B.Tech in Mathematics & Computing | BS in Data Science
-
----
-
-⭐ If you find this project useful, feel free to star the repository!
