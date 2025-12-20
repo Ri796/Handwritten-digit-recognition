@@ -31,8 +31,9 @@ This project demonstrates:
 
 **MNIST Handwritten Digits Dataset**
 
-* 60,000 training images
-* 10,000 test images
+* 60,000 total dataset images
+* 36,000 training images
+* 24,000 test images
 * Image size: 28×28 (grayscale)
 * Classes: Digits 0–9
 
