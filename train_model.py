@@ -17,8 +17,7 @@ class CNN(nn.Module):
     self.conv3=nn.Conv2d(64,128, kernel_size=3)
     self.pool=nn.MaxPool2d(kernel_size=2, stride=2)
     
-    # Custom model logic: 128*1*1
-    # Let's verify dimensions:
+    # Model logic: 128*1*1 : Output
     # Input: 28x28
     # Conv1(3x3) -> 26x26 -> Pool -> 13x13 (32 ch)
     # Conv2(3x3) -> 11x11 -> Pool -> 5x5 (64 ch)
@@ -67,7 +66,7 @@ def run_training_and_export():
     loss_fn = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters(), lr=0.001)
 
-    EPOCHS = 3 # Can be increased to 10 for better accuracy.
+    EPOCHS = 10
     
     print(f"Training for {EPOCHS} epochs...")
     
@@ -97,16 +96,15 @@ def run_training_and_export():
 
     print("\n--- Exporting to ONNX for Android ---")
     
-    # 1. Prepare for export (Evaluation mode)
+    # Prepare for export (Evaluation mode)
     model.eval()
     
-    # 2. Create Dummy Input (1 channel, 28x28 images)
+    # Create Dummy Input (1 channel, 28x28 images)
     # IMPORTANT: Move dummy input to same device as model
     dummy_input = torch.randn(1, 1, 28, 28).to(device)
     
     output_path = "mnist_cnn.onnx"
-    
-    # 3. Export
+  
     torch.onnx.export(model, 
                       dummy_input, 
                       output_path, 
@@ -117,7 +115,7 @@ def run_training_and_export():
                       output_names=['output'],
                       dynamic_axes={'input': {0: 'batch_size'}, 'output': {0: 'batch_size'}})
     
-    # 4. Optimize/Fix for Android (Merged Weights)
+    # Optimize/Fix for Android (Merged Weights)
     print("Optimizing ONNX file for mobile...")
     onnx_model = onnx.load(output_path)
     onnx.save(onnx_model, output_path)
